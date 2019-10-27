@@ -1,15 +1,12 @@
 const { Router } = require('express');
 const adminRouter = Router();
 const adminController = require('../controllers/admin');
+const handler = require('../util/handler')
 
 // === Views ===
-adminRouter.get('/add-product', adminController.views.addProduct);
+adminRouter.get('/add-product', handler(adminController.addProductView));
 
 // === REST ===
-adminRouter.post('/add-product', (req, res) => {
-  console.log('POST: /add-product');
-  console.dir(req.body, { colors: true, depth: 5 })
-  return res.redirect('/')
-});
+adminRouter.post('/add-product', handler(adminController.addProductAPI));
 
 module.exports = adminRouter;

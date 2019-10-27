@@ -20,8 +20,7 @@ app.use(shopRouter);
 // TODO move from here
 app.use((req, res, next) => {
   console.log('???????????')
-  // throw new Error('asdsdsads')
-  res.send('asdasddsa')
+  res.send('404')
 });
 
 
