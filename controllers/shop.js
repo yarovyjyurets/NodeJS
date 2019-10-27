@@ -10,6 +10,39 @@ const getHomePage = async (req, res) => {
   });
 };
 
+const getCart = async (req, res) => {
+  const path = req.baseUrl + req.path;
+  const method = req.method;
+  console.log(`${method.toUpperCase()}: ${path}`);
+  return res.render('shop/cart', {
+    pageTitle: 'Cart',
+    path
+  });
+};
+
+const getOrders = async (req, res) => {
+  const path = req.baseUrl + req.path;
+  const method = req.method;
+  console.log(`${method.toUpperCase()}: ${path}`);
+  return res.render('shop/orders', {
+    pageTitle: 'Orders',
+    path
+  });
+};
+
+const getCheckout = async (req, res) => {
+  const path = req.baseUrl + req.path;
+  const method = req.method;
+  console.log(`${method.toUpperCase()}: ${path}`);
+  return res.render('shop/checkout', {
+    pageTitle: 'Checkout',
+    path
+  });
+};
+
 module.exports = {
-  getHomePage
+  getHomePage,
+  getCart,
+  getOrders,
+  getCheckout
 };

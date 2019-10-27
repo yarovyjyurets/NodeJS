@@ -1,34 +1,28 @@
 NodeJS road map!
 
-***TODO***
+***GENERAL TODO***
+add logging middleware for "GET: path"
 
-add dummy writing to file
-split to MVC
-
-
-***Requirements***
+***Views Requirements***
 ***Done***
 EJS views: (common navigation; headers)
 GET /home-page GET /product-list
 GET /admin/add-product (for admin)
 404
 GET /admin/product-list (for admin)
-***Done***
 GET /cart
 GET /checkout
 GET /orders
-
+***TODO***
 GET /admin/edit-product/{id} (for admin)
 
-
-// REST
+***REST Requirements***
 ***Done***
 POST /products (for admin)
 GET /products
-***Done***
+***TODO***
 Admin:
 PATCH /products/{id} (for admin)
 DELETE /products/{id} (for admin)
-
 Public:
 GET /products/{id}
