@@ -12,12 +12,12 @@ EJS views: (common navigation; headers)
 GET /home-page GET /product-list
 GET /admin/add-product (for admin)
 404
+GET /admin/product-list (for admin)
 ***Done***
 GET /cart
 GET /checkout
 GET /orders
 
-GET /admin/product-list (for admin)
 GET /admin/edit-product/{id} (for admin)
 
 

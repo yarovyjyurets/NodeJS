@@ -1,10 +1,10 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
-   <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/navigation.ejs') %>
 
     <main>
         <form class="product-form" action="/admin/add-product" method="POST">
@@ -14,7 +14,8 @@
             </div>
             <div class="form-control">
                 <label for="imageUrl">Image URL</label>
-                <input type="text" name="imageUrl" id="imageUrl" value="https://www.lloydmotorgroup.com/ImageLibrary/Vehicle/272642-aotugcmvtEKoUKDBSYFO9A.jpg">
+                <input type="text" name="imageUrl" id="imageUrl"
+                    value="https://www.lloydmotorgroup.com/ImageLibrary/Vehicle/272642-aotugcmvtEKoUKDBSYFO9A.jpg">
             </div>
             <div class="form-control">
                 <label for="price">Price</label>
@@ -28,4 +29,5 @@
             <button class="btn" type="submit">Add Product</button>
         </form>
     </main>
+</body>
 <%- include('../includes/end.ejs') %>
