@@ -2,6 +2,8 @@ NodeJS road map!
 
 ***GENERAL TODO***
 add logging middleware for "GET: path"
+add details view for product
+add to cart: {products: [{id, qty}], totalPrice}
 
 ***Views Requirements***
 ***Done***
