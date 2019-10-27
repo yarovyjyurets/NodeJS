@@ -5,6 +5,7 @@ const path = require('path');
 const constants = require('./core/constants');
 const shopRouter = require('./routers/shop');
 const adminRouter = require('./routers/admin');
+const notFoundController = require('./controllers/404');
 
 const app = express();
 // SETTINGS
@@ -17,11 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // ROUTERS
 app.use('/admin', adminRouter);
 app.use(shopRouter);
-// TODO move from here
-app.use((req, res, next) => {
-  console.log('???????????')
-  res.send('404')
-});
+app.use(notFoundController);
 
 
 const port = process.env.PORT || constants.PORT;

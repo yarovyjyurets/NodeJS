@@ -5,28 +5,30 @@ NodeJS road map!
 add dummy writing to file
 split to MVC
 
-***Done***
-GET /home-page
 
 ***Requirements***
+***Done***
 EJS views: (common navigation; headers)
+GET /home-page GET /product-list
+GET /admin/add-product (for admin)
+404
+***Done***
 GET /cart
-GET /product-list
 GET /checkout
 GET /orders
 
-GET /admin/add-product (for admin)
 GET /admin/product-list (for admin)
 GET /admin/edit-product/{id} (for admin)
 
-404
 
 // REST
-Admin:
+***Done***
 POST /products (for admin)
+GET /products
+***Done***
+Admin:
 PATCH /products/{id} (for admin)
 DELETE /products/{id} (for admin)
 
 Public:
-GET /products
 GET /products/{id}

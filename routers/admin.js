@@ -5,6 +5,7 @@ const handler = require('../util/handler')
 
 // === Views ===
 adminRouter.get('/add-product', handler(adminController.addProductView));
+adminRouter.get('/product-list', handler(adminController.productListView));
 
 // === REST ===
 adminRouter.post('/add-product', handler(adminController.addProductAPI));
