@@ -1,9 +1,11 @@
 const { Router } = require('express');
+const shopController = require('../controllers/shop');
+
 const shopRouter = Router();
 
-shopRouter.get('/', (req, res) => {
-  console.log('GET: /');
-  return res.sendFile('views/shop.html', { root: process.cwd() })
-});
+// === Views ===
+shopRouter.get('/', shopController.getHomePage);
+
+// === REST ===
 
 module.exports = shopRouter;
