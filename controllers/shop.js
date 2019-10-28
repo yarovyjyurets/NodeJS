@@ -40,9 +40,31 @@ const getCheckout = async (req, res) => {
   });
 };
 
+const getProductDetail = async (req, res) => {
+  const path = req.baseUrl + req.path;
+  const method = req.method;
+  console.log(`${method.toUpperCase()}: ${path}`);
+  const product = await Products.getProductById(req.params.id);
+  return res.render('shop/product-detail', {
+    pageTitle: 'Product details',
+    path: '/',
+    product
+  });
+};
+
+const postCart = async (req, res) => {
+  const path = req.baseUrl + req.path;
+  const method = req.method;
+  console.log(`${method.toUpperCase()}: ${path}`);
+  console.dir(req.body, { colors: true, depth: 10 })
+  res.redirect('/')
+};
+
 module.exports = {
   getHomePage,
   getCart,
   getOrders,
-  getCheckout
+  getCheckout,
+  getProductDetail,
+  postCart,
 };

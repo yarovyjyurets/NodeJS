@@ -19,11 +19,21 @@ const getAll = async () => {
 const addProduct = async (product) => {
   const rawData = await readFile(PRODUCTS_PATH);
   const products = JSON.parse(rawData);
+  product.id = Math.ceil(Math.random() * 100).toString();
   products.push(product);
   return writeFile(PRODUCTS_PATH, JSON.stringify(products));
 };
 
+const getProductById = async (id) => {
+  const rawData = await readFile(PRODUCTS_PATH);
+  const products = JSON.parse(rawData);
+  const product = products.find(p => p.id === id);
+
+  return product;
+};
+
 module.exports = {
   getAll,
-  addProduct
+  addProduct,
+  getProductById
 }

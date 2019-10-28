@@ -15,6 +15,7 @@ app.set('views', 'views');
 // MIDLEWARES
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // ROUTERS
 app.use('/admin', adminRouter);
 app.use(shopRouter);

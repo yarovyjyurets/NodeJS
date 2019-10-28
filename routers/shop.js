@@ -9,7 +9,9 @@ shopRouter.get('/', handler(shopController.getHomePage));
 shopRouter.get('/cart', handler(shopController.getCart));
 shopRouter.get('/orders', handler(shopController.getOrders));
 shopRouter.get('/checkout', handler(shopController.getCheckout));
+shopRouter.get('/product-detail/:id', handler(shopController.getProductDetail));
 
 // === REST ===
+shopRouter.post('/cart', handler(shopController.postCart));
 
 module.exports = shopRouter;
