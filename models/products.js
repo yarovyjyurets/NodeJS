@@ -1,14 +1,26 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
-const writeFile = promisify(fs.writeFile);
-
 const PRODUCTS_PATH = path.join(
   path.dirname(process.mainModule.filename),
   'data',
   'products.json'
 );
+
+
+const writeFile = promisify(fs.writeFile);
+const readFile = (...args) => {
+  return promisify(fs.readFile).call(null, ...args)
+    .catch(async (e) => {
+      if (e.code === 'ENOENT') {
+        const defaultData = JSON.stringify([]);
+        await writeFile(PRODUCTS_PATH, defaultData);
+        return defaultData;
+      } else {
+        throw e;
+      }
+    })
+}
 
 const getAll = async () => {
   const rawData = await readFile(PRODUCTS_PATH);
