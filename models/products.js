@@ -7,31 +7,32 @@ const PRODUCTS_PATH = path.join(
   'data',
   'products.json'
 );
-const writeFile = promisify(fs.writeFile);
+const DEFAULT_PRODUCTS = [];
+const saveProducts = async products => {
+  await promisify(fs.writeFile).call(null, PRODUCTS_PATH, JSON.stringify(products));
+  return products;
+};
 const readFile = (...args) => {
   return promisify(fs.readFile).call(null, ...args)
     .then(rawData => JSON.parse(rawData))
     .catch(async (e) => {
       if (e.code === 'ENOENT') {
-        const defaultData = [];
-        await writeFile(PRODUCTS_PATH, JSON.stringify(defaultData));
-        return defaultData;
+
+        await saveProducts(DEFAULT_PRODUCTS);
+        return DEFAULT_PRODUCTS;
       } else {
         throw e;
       }
     })
 }
 
-const getAll = async () => {
-  const products = await readFile(PRODUCTS_PATH);
-  return products;
-};
+const getAll = () => readFile(PRODUCTS_PATH);
 
 const addProduct = async (product) => {
   const products = await readFile(PRODUCTS_PATH);
   product.id = Math.ceil(Math.random() * 100).toString();
   products.push(product);
-  return writeFile(PRODUCTS_PATH, JSON.stringify(products));
+  return saveProducts(products);
 };
 
 const getProductById = async (id) => {
@@ -41,8 +42,20 @@ const getProductById = async (id) => {
   return product;
 };
 
+const updateProductById = async (id, product) => {
+  const products = await readFile(PRODUCTS_PATH);
+  const indexForUpdatedProduct = products.findIndex(p => p.id === id);
+  if (!~indexForUpdatedProduct) {
+    console.warn(`Car by ID: ${id} not found for update!`);
+    return;
+  }
+  products[indexForUpdatedProduct] = { ...product, id };
+  return saveProducts(products);
+};
+
 module.exports = {
   getAll,
   addProduct,
-  getProductById
+  getProductById,
+  updateProductById,
 }

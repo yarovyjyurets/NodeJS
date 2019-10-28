@@ -1,4 +1,5 @@
 const Products = require('../models/products');
+const Cart = require('../models/cart');
 
 const getHomePage = async (req, res) => {
   const products = await Products.getAll();
@@ -40,7 +41,9 @@ const getProductDetail = async (req, res) => {
 };
 
 const postCart = async (req, res) => {
-  res.redirect('/')
+  const product = await Products.getProductById(req.body.productId);
+  await Cart.addProduct(product);
+  res.redirect(req.fullPath);
 };
 
 module.exports = {
@@ -49,5 +52,5 @@ module.exports = {
   getOrders,
   getCheckout,
   getProductDetail,
-  postCart,
+  postCart
 };

@@ -1,11 +1,10 @@
 const Products = require('../models/products');
 
 const addProductView = (req, res) => {
-  console.log('????')
-  console.dir(req.fullPath, { colors: true, depth: 5 })
-  return res.render('admin/add-product', {
+  return res.render('admin/edit-product', {
     pageTitle: 'Add product',
-    path: req.fullPath 
+    path: req.fullPath,
+    editMode: false
   });
 }
 
@@ -23,8 +22,25 @@ const productListView = async (req, res) => {
   });
 }
 
+const editProductView = async (req, res) => {
+  const product = await Products.getProductById(req.params.productId);
+  return res.render('admin/edit-product', {
+    pageTitle: 'Admin edit product',
+    path: req.fullPath,
+    editMode: true,
+    product
+  });
+}
+
+const editProductAPI = async (req, res) => {
+  await Products.updateProductById(req.params.productId, req.body);
+  res.redirect('/');
+}
+
 module.exports = {
   addProductView,
   addProductAPI,
-  productListView
+  productListView,
+  editProductView,
+  editProductAPI,
 }
