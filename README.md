@@ -2,7 +2,7 @@ NodeJS road map!
 
 ***GENERAL TODO***
 - refactor models(extract to utils PATH, promisifies)
-- <s>add to cart: {products: [{id, qty}], totalPrice}</s>
+- <s>add to cart: {products: {id:qty}, totalPrice}</s>
 - <s>add logging middleware for "GET: path"</s>
 - <s>add details view for product</s>
 

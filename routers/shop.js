@@ -13,5 +13,6 @@ shopRouter.get('/product-detail/:id', handler(shopController.getProductDetail));
 
 // === REST ===
 shopRouter.post('/cart', handler(shopController.postCart));
+shopRouter.post('/cart-delete-item/:productId', handler(shopController.postDeleteProductFromCart));
 
 module.exports = shopRouter;

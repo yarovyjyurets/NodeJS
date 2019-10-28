@@ -1,13 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
+const Products = require('./products');
 
 const CART_PATH = path.join(
   path.dirname(process.mainModule.filename),
   'data',
   'cart.json'
 );
-const defaultCartData = { products: [], totalPrice: '0' };
+const defaultCartData = { products: {}, totalPrice: 0 };
 const writeFile = async (...args) => {
   const [path, data, ...rest] = args;
   await promisify(fs.writeFile).call(null, path, JSON.stringify(data), ...rest);
@@ -26,24 +27,39 @@ const readFile = (...args) => {
     })
 }
 
-const getCart = () => readFile(CART_PATH);
-
-const addProduct = async (product) => {
+const getCart = async () => {
+  const products = await Products.getAll();
   const cart = await readFile(CART_PATH);
-  const existingProduct = cart.products.find(p => p.id === product.id);
+  const productsInCart = products
+    .filter(p => cart.products[p.id])
+    .map(p => ({ ...p, qty: cart.products[p.id].qty }))
+  const totalPirce = productsInCart.reduce((acc, p) => {
+    return acc += p.price * cart.products[p.id].qty;
+  }, 0);
+
+  return { products: productsInCart, totalPirce };
+};
+
+const addProduct = async (productId) => {
+  const cart = await readFile(CART_PATH);
+  const existingProduct = cart.products[productId];
   if (existingProduct) {
     existingProduct.qty += 1;
-    cart.totalPrice = Number(cart.totalPrice) + Number(existingProduct.price);
   } else {
-    product.qty = 1;
-    cart.products.push(product);
-    cart.totalPrice = Number(cart.totalPrice) + Number(product.price);
+    cart.products[productId] = { qty: 1 };
   }
+  return writeFile(CART_PATH, cart);
+};
+
+const deleteProduct = async (productId) => {
+  const cart = await readFile(CART_PATH);
+  delete cart.products[productId];
   return writeFile(CART_PATH, cart);
 };
 
 
 module.exports = {
   getCart,
-  addProduct
+  addProduct,
+  deleteProduct,
 }

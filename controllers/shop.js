@@ -11,9 +11,11 @@ const getHomePage = async (req, res) => {
 };
 
 const getCart = async (req, res) => {
+  const cart = await Cart.getCart();
   return res.render('shop/cart', {
     pageTitle: 'Cart',
     path: req.fullPath,
+    cart
   });
 };
 
@@ -41,9 +43,13 @@ const getProductDetail = async (req, res) => {
 };
 
 const postCart = async (req, res) => {
-  const product = await Products.getProductById(req.body.productId);
-  await Cart.addProduct(product);
-  res.redirect(req.fullPath);
+  await Cart.addProduct(req.body.productId);
+  res.redirect('/');
+};
+
+const postDeleteProductFromCart = async (req, res) => {
+  await Cart.deleteProduct(req.params.productId);
+  res.redirect('/cart');
 };
 
 module.exports = {
@@ -52,5 +58,6 @@ module.exports = {
   getOrders,
   getCheckout,
   getProductDetail,
-  postCart
+  postCart,
+  postDeleteProductFromCart,
 };
