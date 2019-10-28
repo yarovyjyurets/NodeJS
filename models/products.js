@@ -53,9 +53,21 @@ const updateProductById = async (id, product) => {
   return saveProducts(products);
 };
 
+const removeProductById = async (id) => {
+  const products = await readFile(PRODUCTS_PATH);
+  const indexForRemoveProduct = products.findIndex(p => p.id === id);
+  if (!~indexForRemoveProduct) {
+    console.warn(`Car by ID: ${id} not found for delete!`);
+    return;
+  }
+  products.splice(indexForRemoveProduct, 1);
+  return saveProducts(products);
+};
+
 module.exports = {
   getAll,
   addProduct,
   getProductById,
   updateProductById,
+  removeProductById,
 }

@@ -34,7 +34,12 @@ const editProductView = async (req, res) => {
 
 const editProductAPI = async (req, res) => {
   await Products.updateProductById(req.params.productId, req.body);
-  res.redirect('/');
+  res.redirect('/admin/product-list');
+}
+
+const deleteProductAPI = async (req, res) => {
+  await Products.removeProductById(req.params.productId);
+  res.redirect('/admin/product-list');
 }
 
 module.exports = {
@@ -43,4 +48,5 @@ module.exports = {
   productListView,
   editProductView,
   editProductAPI,
+  deleteProductAPI
 }
