@@ -1,13 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
+
 const PRODUCTS_PATH = path.join(
   path.dirname(process.mainModule.filename),
   'data',
   'products.json'
 );
-
-
 const writeFile = promisify(fs.writeFile);
 const readFile = (...args) => {
   return promisify(fs.readFile).call(null, ...args)

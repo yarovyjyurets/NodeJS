@@ -6,6 +6,9 @@ const constants = require('./core/constants');
 const shopRouter = require('./routers/shop');
 const adminRouter = require('./routers/admin');
 const notFoundController = require('./controllers/404');
+//midlewares
+const logRequest = require('./middlewares/logRequest');
+const getFullPath = require('./middlewares/getFullPath');
 
 const app = express();
 // SETTINGS
@@ -16,6 +19,8 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(logRequest);
+app.use(getFullPath);
 // ROUTERS
 app.use('/admin', adminRouter);
 app.use(shopRouter);

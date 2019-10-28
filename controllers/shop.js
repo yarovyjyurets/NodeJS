@@ -1,62 +1,45 @@
 const Products = require('../models/products');
 
 const getHomePage = async (req, res) => {
-  console.log('GET: /')
   const products = await Products.getAll();
   return res.render('shop/home', {
     pageTitle: 'Home page',
     products,
-    path: req.url
+    path: req.fullPath
   });
 };
 
 const getCart = async (req, res) => {
-  const path = req.baseUrl + req.path;
-  const method = req.method;
-  console.log(`${method.toUpperCase()}: ${path}`);
   return res.render('shop/cart', {
     pageTitle: 'Cart',
-    path
+    path: req.fullPath,
   });
 };
 
 const getOrders = async (req, res) => {
-  const path = req.baseUrl + req.path;
-  const method = req.method;
-  console.log(`${method.toUpperCase()}: ${path}`);
   return res.render('shop/orders', {
     pageTitle: 'Orders',
-    path
+    path: req.fullPath,
   });
 };
 
 const getCheckout = async (req, res) => {
-  const path = req.baseUrl + req.path;
-  const method = req.method;
-  console.log(`${method.toUpperCase()}: ${path}`);
   return res.render('shop/checkout', {
     pageTitle: 'Checkout',
-    path
+    path: req.fullPath,
   });
 };
 
 const getProductDetail = async (req, res) => {
-  const path = req.baseUrl + req.path;
-  const method = req.method;
-  console.log(`${method.toUpperCase()}: ${path}`);
   const product = await Products.getProductById(req.params.id);
   return res.render('shop/product-detail', {
     pageTitle: 'Product details',
-    path: '/',
+    path: req.fullPath,
     product
   });
 };
 
 const postCart = async (req, res) => {
-  const path = req.baseUrl + req.path;
-  const method = req.method;
-  console.log(`${method.toUpperCase()}: ${path}`);
-  console.dir(req.body, { colors: true, depth: 10 })
   res.redirect('/')
 };
 
