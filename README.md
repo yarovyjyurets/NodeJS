@@ -1,7 +1,11 @@
 NodeJS road map!
 
 ***GENERAL TODO***
-- refactor models(extract to utils PATH, promisifies)
+- add docker-compose for local develop with volumes
+- add Dockerfile
+- connect real DB(Mysql) 
+docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib/mysql -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=pwd mysql:8.0
+- add Sequelize
 - <s>add to cart: {products: {id:qty}, totalPrice}</s>
 - <s>add logging middleware for "GET: path"</s>
 - <s>add details view for product</s>
@@ -28,9 +32,8 @@ NodeJS road map!
 - <s>POST /products (for admin)</s>
 - <s>GET /products</s>
 - POST(better PATCH) /products/{id} (for admin)
+- <s>DELETE /products/{id} (for admin)</s>
 
 ***TODO***
 - Admin:
-  - DELETE /products/{id} (for admin)
 - Public:
-  - GET /products/{id}
