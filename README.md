@@ -1,9 +1,11 @@
 NodeJS road map!
 
 ***GENERAL TODO***
+- refactor cart Model with DB(Mysql), add association. 
+- refactor structure with API/app.start, db separate
+- add configuration file, env-vars
 - add docker-compose for local develop with volumes
 - add Dockerfile
-- connect real DB(Mysql) 
 docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib/mysql -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=pwd mysql:8.0
 - add Sequelize
 - <s>add to cart: {products: {id:qty}, totalPrice}</s>

@@ -9,6 +9,8 @@ const notFoundController = require('./controllers/404');
 //midlewares
 const logRequest = require('./middlewares/logRequest');
 const getFullPath = require('./middlewares/getFullPath');
+//db
+const db = require('./db');
 
 const app = express();
 // SETTINGS
@@ -28,4 +30,9 @@ app.use(notFoundController);
 
 
 const port = process.env.PORT || constants.PORT;
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+
+(async () => {
+  await db.start();
+  app.listen(port, () => console.log(`Server listening on port ${port}`));
+})();
+
