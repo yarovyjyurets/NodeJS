@@ -1,6 +1,7 @@
 const { Sequelize } = require('sequelize');
 const globby = require('globby');
 const path = require('path');
+const {associateModels} = require('./associations');
 
 const sequelize = new Sequelize('shop', 'root', 'qwe', {
   host: 'localhost',
@@ -30,11 +31,12 @@ models.forEach((file) => {
 /**
  * Association models
  */
-Object.keys(db).forEach((key) => {
-  if ('associate' in db[key]) {
-    db[key].associate(db);
-  }
-});
+// Object.keys(db).forEach((key) => {
+//   if ('associate' in db[key]) {
+//     db[key].associate(db);
+//   }
+// });
+associateModels(db);
 
 db.sequelize = sequelize;
 /**

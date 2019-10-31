@@ -1,5 +1,7 @@
+const { modelNames: { CART } } = require('../constants');
+
 module.exports = (sequelize, DataTypes) => {
-  const Cart = sequelize.define('Cart', {
+  const Cart = sequelize.define(CART, {
     // attributes
     id: {
       type: DataTypes.INTEGER,
@@ -14,13 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     // options
   });
-
-  Cart.associate = (db) => {
-    db.Cart.belongsTo(db.Product, {
-      foreignKey: 'productId',
-      targetKey: 'id'
-    })
-  };
 
   return Cart;
 }

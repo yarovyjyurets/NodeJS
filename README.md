@@ -1,5 +1,11 @@
 NodeJS road map!
 
+JUST emulate that user is authorized
+
+Product.belongsTo(user, {constraints: true, onDelete: 'CASCADE'}); // userId in Product ???CASCADE
+User.hasMany(Product); // userId in Product
+
+
 ***GENERAL TODO***
 - refactor cart Model with DB(Mysql), add association. 
 - refactor structure with API/app.start, db separate
