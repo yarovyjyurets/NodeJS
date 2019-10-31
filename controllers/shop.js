@@ -11,7 +11,7 @@ const getHomePage = async (req, res) => {
 };
 
 const getCart = async (req, res) => {
-  const cart = await Cart.getCart();
+  const cart = await Cart.getCartForUser(req.user);
   return res.render('shop/cart', {
     pageTitle: 'Cart',
     path: req.fullPath,
@@ -43,12 +43,12 @@ const getProductDetail = async (req, res) => {
 };
 
 const postCart = async (req, res) => {
-  await Cart.addProduct(req.body.productId);
+  await Cart.addProduct(req.body.productId, req.cart);
   res.redirect('/');
 };
 
 const postDeleteProductFromCart = async (req, res) => {
-  await Cart.deleteProduct(req.params.productId);
+  await Cart.deleteProduct(req.params.productId, req.cart);
   res.redirect('/cart');
 };
 

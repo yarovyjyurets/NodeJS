@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
-    },
-    productId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
   }, {
     // options

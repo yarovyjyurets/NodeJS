@@ -11,6 +11,7 @@ const logRequest = require('./middlewares/logRequest');
 const getFullPath = require('./middlewares/getFullPath');
 //db
 const db = require('./db');
+const { modelNames } = require('./db/constants');
 
 const app = express();
 // SETTINGS
@@ -23,6 +24,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logRequest);
 app.use(getFullPath);
+
+/**
+ * Mocked one user for application
+ */
+app.use(async (req, res, next) => {
+  const dummyUser = await db[modelNames.USER].findByPk(1);
+  if (dummyUser) {
+    const cart = await dummyUser.getCart();
+    req.user = dummyUser;
+    req.cart = cart;
+  } else {
+    const createdUser = await db[modelNames.USER].create({ email: 'yurets@gmail.com', password: 'qwe', name: 'Yurets' });
+    const createdCart = await createdUser.createCart();
+
+    req.user = createdUser;
+    req.cart = createdCart;
+  }
+  next();
+});
+
 // ROUTERS
 app.use('/admin', adminRouter);
 app.use(shopRouter);
@@ -33,7 +54,7 @@ const port = process.env.PORT || constants.PORT;
 
 (async () => {
   await db.start();
-  await db.sequelize.sync({ force: true });
+  // await db.sequelize.sync({ force: true });
 
   app.listen(port, () => console.log(`Server listening on port ${port}`));
 })();
