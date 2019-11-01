@@ -17,6 +17,12 @@
       </li>
       <% }) %>
     </ul>
+    <hr>
+    <div class="centered">
+      <form action="/placeOrder" method="POST">
+        <input type="submit" class="btn" value="Place Order">
+      </form>
+    </div>
     <% } else { %>
     <h1>No Products in Cart!</h1>
     <% } %>

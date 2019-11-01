@@ -1,5 +1,6 @@
 const Products = require('../models/products');
 const Cart = require('../models/cart');
+const Order = require('../models/order');
 
 const getHomePage = async (req, res) => {
   const products = await Products.getAll();
@@ -20,9 +21,11 @@ const getCart = async (req, res) => {
 };
 
 const getOrders = async (req, res) => {
+  const orders = await Order.getAll(req.user);
   return res.render('shop/orders', {
     pageTitle: 'Orders',
     path: req.fullPath,
+    orders
   });
 };
 
@@ -52,6 +55,11 @@ const postDeleteProductFromCart = async (req, res) => {
   res.redirect('/cart');
 };
 
+const postPlaceOrder = async (req, res) => {
+  await Order.create(req.user, req.cart);
+  res.redirect('/orders');
+};
+
 module.exports = {
   getHomePage,
   getCart,
@@ -60,4 +68,5 @@ module.exports = {
   getProductDetail,
   postCart,
   postDeleteProductFromCart,
+  postPlaceOrder,
 };
