@@ -3,7 +3,7 @@ const { modelNames } = require('../constants')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable(modelNames.ORDER_ITEM, {
+    return queryInterface.createTable(modelNames.CART_ITEM, {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,6 +13,20 @@ module.exports = {
       qty: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },
+      CartId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: modelNames.CART,
+          key: 'id',
+        },
+      },
+      ProductId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: modelNames.PRODUCT,
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +40,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable(modelNames.ORDER_ITEM);
+    return queryInterface.dropTable(modelNames.CART_ITEM);
   }
 };

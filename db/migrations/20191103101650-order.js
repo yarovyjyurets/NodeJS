@@ -1,18 +1,21 @@
 'use strict';
-const {modelNames}  = require('../constants')
+const { modelNames } = require('../constants')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable(modelNames.CART_ITEM, {
+    return queryInterface.createTable(modelNames.ORDER, {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      qty: {
+      UserId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        references: {
+          model: modelNames.USER,
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +29,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable(modelNames.CART_ITEM);
+    return queryInterface.dropTable(modelNames.ORDER);
   }
 };

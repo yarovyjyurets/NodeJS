@@ -3,12 +3,19 @@ const { modelNames } = require('../constants')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable(modelNames.ORDER, {
+    return queryInterface.createTable(modelNames.CART, {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
+      },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: modelNames.USER,
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,
@@ -22,6 +29,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable(modelNames.ORDER);
+    return queryInterface.dropTable(modelNames.CART);
   }
 };
