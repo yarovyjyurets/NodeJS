@@ -1,15 +1,13 @@
 NodeJS road map!
 
-JUST emulate that user is authorized and admin(can add and edit data);
-
-
 ***GENERAL TODO***
+- add migrations
 - refactor structure with API/app.start, db separate
 - add configuration file, env-vars
 - add docker-compose for local develop with volumes
 - add Dockerfile
 docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib/mysql -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=pwd mysql:8.0
-- add Sequelize
+- <s>add Sequelize</s>
 - <s>refactor cart Model with DB(Mysql), add association. </s>
 - <s>add to cart: {products: {id:qty}, totalPrice}</s>
 - <s>add logging middleware for "GET: path"</s>

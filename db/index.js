@@ -3,7 +3,7 @@ const globby = require('globby');
 const path = require('path');
 const {associateModels} = require('./associations');
 
-const sequelize = new Sequelize('shop', 'root', 'qwe', {
+const sequelize = new Sequelize('shop', 'root', 'pwd', {
   host: 'localhost',
   dialect: 'mysql',
   define: {
