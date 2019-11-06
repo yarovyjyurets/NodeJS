@@ -32,7 +32,7 @@
           </form>
         </div>
         <div class="card__actions">
-          <a class="btn" href="/product-detail/<%= product.id %>">Details</a>
+          <a class="btn" href="/product-detail/<%= product.id || product._id %>">Details</a>
         </div>
       </article>
       <% } %>

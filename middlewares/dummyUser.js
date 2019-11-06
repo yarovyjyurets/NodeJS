@@ -12,7 +12,6 @@ module.exports = async (req, res, next) => {
     req.cart = cart;
   } else {
     const createdUser = await User.create(MOCK_USER);
-    console.log(createdUser.ops && createdUser.ops[0] || createdUser)
     const createdCart = await User.createCart(createdUser.ops && createdUser.ops[0] || createdUser);
     req.user = createdUser;
     req.cart = createdCart;

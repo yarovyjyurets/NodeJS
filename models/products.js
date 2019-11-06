@@ -1,5 +1,6 @@
 const db = require('../db');
 const { getShopDb } = require('../mongDB');
+const { ObjectId } = require('mongodb');
 
 let getAll;
 let addProduct;
@@ -22,6 +23,18 @@ if (process.env.DB === 'SQL') {
     const shopDB = getShopDb();
     return shopDB.collection('products').insert(product);
   }
+  getProductById = (id) => {
+    const shopDB = getShopDb();
+    return shopDB.collection('products').findOne({ _id: new ObjectId(id) });
+  }
+  updateProductById = (id, product) => {
+    const shopDB = getShopDb();
+    return shopDB.collection('products').updateOne({ _id: new ObjectId(id) }, { $set: product });
+  };
+  removeProductById = (id) => {
+    const shopDB = getShopDb();
+    return shopDB.collection('products').deleteOne({ _id: new ObjectId(id) });
+  };
 }
 
 module.exports = {
