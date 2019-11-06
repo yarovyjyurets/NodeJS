@@ -46,12 +46,12 @@ const getProductDetail = async (req, res) => {
 };
 
 const postCart = async (req, res) => {
-  await Cart.addProduct(req.body.productId, req.cart);
+  await Cart.addProduct(req.body.productId, req.cart, req.user);
   res.redirect('/');
 };
 
 const postDeleteProductFromCart = async (req, res) => {
-  await Cart.deleteProduct(req.params.productId, req.cart);
+  await Cart.deleteProduct(req.params.productId, req.cart, req.user);
   res.redirect('/cart');
 };
 
