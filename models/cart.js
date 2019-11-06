@@ -38,7 +38,7 @@ if (process.env.DB === 'SQL') {
     const mappedProducts = products.map(({ title, _id, price }) => ({
       title,
       price,
-      id: _id.toString(),
+      _id: _id.toString(),
       qty: user.cart.products.find(p => _id.toString() === p.productId).qty
     }));
     const totalPrice = mappedProducts.reduce((acc, { price, qty }) => acc + (Number(price) * qty), 0);
