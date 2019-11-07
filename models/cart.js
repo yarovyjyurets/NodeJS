@@ -50,11 +50,10 @@ if (process.env.DB === 'SQL') {
     const producIndextInCart = await cart.products.findIndex(el => el.productId === productId);
     if (~producIndextInCart) {
       cart.products[producIndextInCart].qty += 1;
-      await shopDB.collection('user').updateOne({ _id: user._id }, { $set: { cart } });
     } else {
       cart.products.push({ productId, qty: 1 });
-      await shopDB.collection('user').updateOne({ _id: user._id }, { $set: { cart } });
     }
+    await shopDB.collection('user').updateOne({ _id: user._id }, { $set: { cart } });
   }
 
   deleteProduct = async (productId, cart, user) => {
