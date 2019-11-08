@@ -1,12 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const path = require('path');
+const MongoDBSessionStore = require('connect-mongodb-session')(session);
+
+const uri = 'mongodb+srv://dev:pwd@shop-cluster-9xhpi.mongodb.net';
+const store = new MongoDBSessionStore({
+  uri,
+  collection: 'sessions',
+  databaseName: 'shop'
+});
+
+store.on('error', function(error) {
+  console.log(error);
+});
 
 const DB = process.env.DB;
 
 const constants = require('./core/constants');
 const shopRouter = require('./routers/shop');
 const adminRouter = require('./routers/admin');
+const authRouter = require('./routers/auth');
 const notFoundController = require('./controllers/404');
 //midlewares
 const logRequest = require('./middlewares/logRequest');
@@ -26,6 +41,13 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  store
+}));
 app.use(logRequest);
 app.use(getFullPath);
 
@@ -37,6 +59,7 @@ app.use(dummyUser);
 // ROUTERS
 app.use('/admin', adminRouter);
 app.use(shopRouter);
+app.use(authRouter);
 app.use(notFoundController);
 
 

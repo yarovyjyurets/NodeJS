@@ -25,12 +25,14 @@
         <div class="card__content">
           <h2 class="product__price">$<%= product.price %></h2>
         </div>
+        <% if (isAuthenticated) { %>
         <div class="card__actions">
           <form action="/cart" method="post">
             <button class="btn" type="submit">Add to Cart</button>
             <input type="hidden" name="productId" value="<%= product.id || product._id %>">
           </form>
         </div>
+        <% } %>
         <div class="card__actions">
           <a class="btn" href="/product-detail/<%= product.id || product._id %>">Details</a>
         </div>

@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 // Connection URL
-const url = 'mongodb+srv://dev:pwd@shop-cluster-9xhpi.mongodb.net/test?retryWrites=true&w=majority';
+const url = 'mongodb+srv://dev:pwd@shop-cluster-9xhpi.mongodb.net';
 
 // Database Name
 const dbName = 'shop';

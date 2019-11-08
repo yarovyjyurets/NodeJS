@@ -7,7 +7,8 @@ const getHomePage = async (req, res) => {
   return res.render('shop/home', {
     pageTitle: 'Home page',
     products,
-    path: req.fullPath
+    path: req.fullPath,
+    isAuthenticated: req.session.isAuthenticated
   });
 };
 
@@ -16,7 +17,8 @@ const getCart = async (req, res) => {
   return res.render('shop/cart', {
     pageTitle: 'Cart',
     path: req.fullPath,
-    cart
+    cart,
+    isAuthenticated: req.session.isAuthenticated
   });
 };
 
@@ -25,7 +27,8 @@ const getOrders = async (req, res) => {
   return res.render('shop/orders', {
     pageTitle: 'Orders',
     path: req.fullPath,
-    orders
+    orders,
+    isAuthenticated: req.session.isAuthenticated
   });
 };
 
@@ -33,6 +36,7 @@ const getCheckout = async (req, res) => {
   return res.render('shop/checkout', {
     pageTitle: 'Checkout',
     path: req.fullPath,
+    isAuthenticated: req.session.isAuthenticated
   });
 };
 
@@ -41,7 +45,8 @@ const getProductDetail = async (req, res) => {
   return res.render('shop/product-detail', {
     pageTitle: 'Product details',
     path: req.fullPath,
-    product
+    product,
+    isAuthenticated: req.session.isAuthenticated
   });
 };
 
