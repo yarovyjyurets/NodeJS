@@ -3,9 +3,7 @@ const Products = require('../models/products');
 const addProductView = (req, res) => {
   return res.render('admin/edit-product', {
     pageTitle: 'Add product',
-    path: req.fullPath,
     editMode: false,
-    isAuthenticated: req.session.isAuthenticated
   });
 }
 
@@ -19,8 +17,6 @@ const productListView = async (req, res) => {
   return res.render('admin/product-list', {
     pageTitle: 'Admin product list',
     products,
-    path: req.fullPath,
-    isAuthenticated: req.session.isAuthenticated
   });
 }
 
@@ -28,10 +24,8 @@ const editProductView = async (req, res) => {
   const product = await Products.getProductById(req.params.productId);
   return res.render('admin/edit-product', {
     pageTitle: 'Admin edit product',
-    path: req.fullPath,
     editMode: true,
     product,
-    isAuthenticated: req.session.isAuthenticated
   });
 }
 

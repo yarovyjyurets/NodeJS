@@ -2,18 +2,10 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 const loginView = (req, res) => {
-  return res.render('auth/login', {
-    pageTitle: 'Login',
-    path: req.fullPath,
-    isAuthenticated: false
-  });
+  return res.render('auth/login', { pageTitle: 'Login' });
 }
 const signUpView = (req, res) => {
-  return res.render('auth/signup', {
-    pageTitle: 'SignUp',
-    path: req.fullPath,
-    isAuthenticated: false
-  });
+  return res.render('auth/signup', { pageTitle: 'SignUp' });
 }
 
 const loginPostAPI = async (req, res) => {

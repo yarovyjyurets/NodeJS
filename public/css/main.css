@@ -64,6 +64,7 @@ form {
   text-decoration: none;
   color: white;
   cursor: pointer;
+  outline: none;
 }
 
 .main-header__item a:hover,

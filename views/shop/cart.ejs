@@ -14,6 +14,7 @@
         <h2>Quantity: <%= p.CartItem && p.CartItem.qty || p.qty %></h2>
         <form action="/cart-delete-item/<%= p.id || p._id %>" method="POST">
           <button class="btn" type="submit">Delete</button>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </form>
       </li>
       <% }) %>
@@ -24,6 +25,7 @@
     <div class="centered">
       <form action="/placeOrder" method="POST">
         <input type="submit" class="btn" value="Place Order">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       </form>
     </div>
     <% } else { %>

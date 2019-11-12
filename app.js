@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 const MongoDBSessionStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
 
 const uri = 'mongodb+srv://dev:pwd@shop-cluster-9xhpi.mongodb.net';
 const store = new MongoDBSessionStore({
@@ -49,13 +50,20 @@ app.use(session({
   saveUninitialized: false,
   store
 }));
+app.use(csrf());
 app.use(logRequest);
 app.use(getFullPath);
 
 /**
- * Mocked one user for application
+ * Business logic: Login
  */
 app.use(userIdentifier);
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  res.locals.isAuthenticated = req.session.isAuthenticated;
+  res.locals.path = req.fullPath;
+  next();
+});
 
 // ROUTERS
 app.use('/admin', authCheck, adminRouter);
