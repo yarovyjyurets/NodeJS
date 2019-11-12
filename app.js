@@ -26,7 +26,7 @@ const notFoundController = require('./controllers/404');
 //midlewares
 const logRequest = require('./middlewares/logRequest');
 const getFullPath = require('./middlewares/getFullPath');
-const dummyUser = require('./middlewares/dummyUser');
+const userIdentifier = require('./middlewares/userIdentifier');
 //db
 const db = require('./db');
 //MongoDB 
@@ -54,7 +54,7 @@ app.use(getFullPath);
 /**
  * Mocked one user for application
  */
-app.use(dummyUser);
+app.use(userIdentifier);
 
 // ROUTERS
 app.use('/admin', adminRouter);

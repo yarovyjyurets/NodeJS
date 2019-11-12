@@ -21,7 +21,7 @@ if (process.env.DB === 'SQL') {
   }
   addProduct = async (product) => {
     const shopDB = getShopDb();
-    return shopDB.collection('products').insert(product);
+    return shopDB.collection('products').insertOne(product);
   }
   getProductById = (id) => {
     const shopDB = getShopDb();

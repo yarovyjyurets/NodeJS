@@ -7,6 +7,7 @@ let getById;
 let create;
 let getCart;
 let createCart;
+let findByQuery;
 
 if (process.env.DB === 'SQL') {
   getById = (userId) => db[modelNames.USER].findByPk(userId);
@@ -18,9 +19,10 @@ if (process.env.DB === 'SQL') {
     const shopDB = getShopDb();
     return shopDB.collection('user').findOne({ _id: new ObjectId(userId) });
   }
-  create = (newUserData) => {
+  create = async (newUserData) => {
     const shopDB = getShopDb();
-    return shopDB.collection('user').insertOne(newUserData);
+    const createdUser = await shopDB.collection('user').insertOne(newUserData);
+    return createdUser.ops && createdUser.ops[0];
   }
   getCart = (user) => user.cart;
   createCart = async (user) => {
@@ -29,6 +31,10 @@ if (process.env.DB === 'SQL') {
     await shopDB.collection('user').updateOne({ _id: user._id }, newUserData);
     const { cart } = await shopDB.collection('user').findOne({ _id: user._id })
     return cart;
+  };
+  findByQuery = async (query) => {
+    const shopDB = getShopDb();
+    return shopDB.collection('user').findOne(query);
   }
 }
 
@@ -37,4 +43,5 @@ module.exports = {
   create,
   createCart,
   getCart,
+  findByQuery,
 };
