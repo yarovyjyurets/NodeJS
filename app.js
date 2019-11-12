@@ -12,7 +12,7 @@ const store = new MongoDBSessionStore({
   databaseName: 'shop'
 });
 
-store.on('error', function(error) {
+store.on('error', function (error) {
   console.log(error);
 });
 
@@ -27,6 +27,7 @@ const notFoundController = require('./controllers/404');
 const logRequest = require('./middlewares/logRequest');
 const getFullPath = require('./middlewares/getFullPath');
 const userIdentifier = require('./middlewares/userIdentifier');
+const authCheck = require('./middlewares/authCheck');
 //db
 const db = require('./db');
 //MongoDB 
@@ -57,7 +58,7 @@ app.use(getFullPath);
 app.use(userIdentifier);
 
 // ROUTERS
-app.use('/admin', adminRouter);
+app.use('/admin', authCheck, adminRouter);
 app.use(shopRouter);
 app.use(authRouter);
 app.use(notFoundController);
