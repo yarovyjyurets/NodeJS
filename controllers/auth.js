@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const mailer = require('../util/mailer');
 
 const loginView = (req, res) => {
   return res.render('auth/login', { pageTitle: 'Login' });
@@ -47,7 +48,9 @@ const signUpPostApi = async (req, res) => {
   const createdUser = await User.create({ email, password: hashedPassword, cart: { products: [] } });
   req.session.isAuthenticated = true;
   req.session.user = createdUser;
-  return res.redirect('/');
+  await req.session.save();
+  res.redirect('/');
+  mailer.singUp(email);
 }
 
 
