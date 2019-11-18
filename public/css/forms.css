@@ -21,3 +21,13 @@
 .form-control textarea:focus {
   outline-color: #00695c;
 }
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered a {
+  display: inline-block;
+}

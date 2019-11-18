@@ -8,6 +8,7 @@ let create;
 let getCart;
 let createCart;
 let findByQuery;
+let update;
 
 if (process.env.DB === 'SQL') {
   getById = (userId) => db[modelNames.USER].findByPk(userId);
@@ -35,6 +36,10 @@ if (process.env.DB === 'SQL') {
   findByQuery = async (query) => {
     const shopDB = getShopDb();
     return shopDB.collection('user').findOne(query);
+  };
+  update = (query, data) => {
+    const shopDB = getShopDb();
+    return shopDB.collection('user').updateOne(query, { $set: data });
   }
 }
 
@@ -44,4 +49,5 @@ module.exports = {
   createCart,
   getCart,
   findByQuery,
+  update
 };

@@ -1,7 +1,7 @@
 NodeJS road map!
 
 ***GENERAL TODO***
-- add migrations
+- Error response for views (flash)
 - refactor structure with API/app.start, db separate
 - add configuration file, env-vars
 - add docker-compose for local develop with volumes
@@ -12,6 +12,11 @@ docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib
 - <s>add to cart: {products: {id:qty}, totalPrice}</s>
 - <s>add logging middleware for "GET: path"</s>
 - <s>add details view for product</s>
+- <s>add migrations</s>
+- <s>Authentication (cookie/session)</s>
+- <s>CSRF</s>
+- <s>Emails</s>
+- <s>Reset passwords</s>
 
 ***Views Requirements***
 
