@@ -5,6 +5,7 @@ const session = require('express-session');
 const path = require('path');
 const MongoDBSessionStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 const uri = 'mongodb+srv://dev:pwd@shop-cluster-9xhpi.mongodb.net';
 const store = new MongoDBSessionStore({
@@ -29,6 +30,7 @@ const logRequest = require('./middlewares/logRequest');
 const getFullPath = require('./middlewares/getFullPath');
 const userIdentifier = require('./middlewares/userIdentifier');
 const authCheck = require('./middlewares/authCheck');
+const warnings = require('./middlewares/warning');
 //db
 const db = require('./db');
 //MongoDB 
@@ -51,8 +53,10 @@ app.use(session({
   store
 }));
 app.use(csrf());
+app.use(flash());
 app.use(logRequest);
 app.use(getFullPath);
+app.use(warnings);
 
 /**
  * Business logic: Login

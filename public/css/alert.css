@@ -1,0 +1,18 @@
+.alert {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.alert-warning {
+  color: #ff6666;
+  background-color: #ffcccc;
+  border-color: #ff6666;
+  font-family: sans-serif;
+}

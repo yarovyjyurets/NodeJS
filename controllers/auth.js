@@ -23,7 +23,7 @@ const resetPasswordView = async (req, res) => {
   const { passwordToken } = req.params;
   const user = await User.findByQuery({ resetToken: passwordToken, exp: { $gt: Date.now() } });
   if (!user) {
-    console.warn('User is not found');
+    req.flash('warn', 'User is not found');
     return res.redirect('/signup');
   }
 
@@ -39,13 +39,13 @@ const loginPostAPI = async (req, res) => {
   const { email, password } = req.body;
   const isSignedUpUser = await User.findByQuery({ email });
   if (!isSignedUpUser) {
-    console.warn('User is not found');
+    req.flash('warn', 'User is not found');
     return res.redirect('/signup');
   }
 
   const isCorrectPassword = await bcrypt.compare(password, isSignedUpUser.password)
   if (!isCorrectPassword) {
-    console.warn('User password is not correct');
+    req.flash('warn', 'User password is not correct');
     return res.redirect('/login');
   }
 
@@ -60,7 +60,7 @@ const logOutPostAPI = async (req, res) => {
 const signUpPostApi = async (req, res) => {
   const { email, password, passwordConfirmation } = req.body;
   if (password !== passwordConfirmation) {
-    console.warn('Passwords are not matched');
+    req.flash('warn', 'Passwords are not matched');
     return res.redirect('/signup');
   }
 
@@ -68,7 +68,8 @@ const signUpPostApi = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
   const isExistUserAlready = await User.findByQuery({ email });
   if (isExistUserAlready) {
-    return res.redirect('/login');
+    req.flash('warn', 'User already exits');
+    return res.redirect('/signup');
   }
 
   const createdUser = await User.create({ email, password: hashedPassword, cart: { products: [] } });
@@ -83,7 +84,7 @@ const forgotPasswordAPI = async (req, res) => {
   const { email } = req.body;
   const isSignedUpUser = await User.findByQuery({ email });
   if (!isSignedUpUser) {
-    console.warn('Can not reset password for unexistent user');
+    req.flash('warn', 'Can not reset password for unexistent user');
     return res.redirect('/forgot-password');
   }
   const resetToken = await getResetToken();
