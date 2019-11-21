@@ -64,10 +64,12 @@ app.use(warnings);
 app.use(userIdentifier);
 app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
+  delete req.body._csrf;
   res.locals.isAuthenticated = req.session.isAuthenticated;
   res.locals.path = req.fullPath;
   next();
 });
+app.use(logRequest);
 
 // ROUTERS
 app.use('/admin', authCheck, adminRouter);

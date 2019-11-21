@@ -8,12 +8,12 @@ const addProductView = (req, res) => {
 }
 
 const addProductAPI = async (req, res) => {
-  await Products.addProduct(req.body);
+  await Products.addProduct(req.body, req.user);
   return res.redirect('/');
 }
 
 const productListView = async (req, res) => {
-  const products = await Products.getAll();
+  const products = await Products.getAllByUser(req.user);
   return res.render('admin/product-list', {
     pageTitle: 'Admin product list',
     products,

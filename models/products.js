@@ -7,6 +7,7 @@ let addProduct;
 let getProductById;
 let updateProductById;
 let removeProductById;
+let getAllByUser;
 
 if (process.env.DB === 'SQL') {
   getAll = () => db.Product.findAll();
@@ -14,14 +15,19 @@ if (process.env.DB === 'SQL') {
   getProductById = (id) => db.Product.findByPk(id);
   updateProductById = (id, product) => db.Product.update(product, { where: { id } });
   removeProductById = (id) => db.Product.destroy({ where: { id } });
+  getAllByUser = () => [];
 } else {
   getAll = async () => {
     const shopDB = getShopDb();
     return shopDB.collection('products').find({}).toArray();
   }
-  addProduct = async (product) => {
+  getAllByUser = async (user) => {
     const shopDB = getShopDb();
-    return shopDB.collection('products').insertOne(product);
+    return shopDB.collection('products').find({ userId: user._id.toString() }).toArray();
+  }
+  addProduct = async (product, user) => {
+    const shopDB = getShopDb();
+    return shopDB.collection('products').insertOne({ userId: user._id.toString(), ...product });
   }
   getProductById = (id) => {
     const shopDB = getShopDb();
@@ -39,6 +45,7 @@ if (process.env.DB === 'SQL') {
 
 module.exports = {
   getAll,
+  getAllByUser,
   addProduct,
   getProductById,
   updateProductById,
