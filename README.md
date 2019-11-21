@@ -1,8 +1,10 @@
 NodeJS road map!
 
 ***GENERAL TODO***
-- Error response for views (flash)
-- refactor structure with API/app.start, db separate
+- Add authorization
+- Add validation with any package(JOI, Validator.js, Express-Validator)
+- Add Error handling
+- refactor structure with API/app.start, db separate, and inversion of control
 - add configuration file, env-vars
 - add docker-compose for local develop with volumes
 - add Dockerfile
@@ -17,6 +19,7 @@ docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib
 - <s>CSRF</s>
 - <s>Emails</s>
 - <s>Reset passwords</s>
+- <s>Error response for views (flash)</s>
 
 ***Views Requirements***
 
