@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const authController = require('../controllers/auth');
 const handler = require('../util/handler')
+const { validateSignUp } = require('../middlewares/validator')
 
 const shopRouter = Router();
 
@@ -14,7 +15,7 @@ shopRouter.get('/reset-password/:passwordToken', handler(authController.resetPas
 // === REST ===
 shopRouter.post('/login', handler(authController.loginPostAPI));
 shopRouter.post('/logout', handler(authController.logOutPostAPI));
-shopRouter.post('/signup', handler(authController.signUpPostApi));
+shopRouter.post('/signup', validateSignUp, handler(authController.signUpPostApi));
 shopRouter.post('/forgot-password', handler(authController.forgotPasswordAPI));
 shopRouter.post('/reset-password', handler(authController.resetPasswordAPI));
 module.exports = shopRouter;

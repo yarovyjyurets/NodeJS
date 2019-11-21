@@ -6,8 +6,11 @@ const ejs = require('ejs');
 const readFileAsync = promisify(fs.readFile);
 
 const sgMail = require('@sendgrid/mail');
+console.log('process.env.SENDGRID_API_KEY')
+console.log(process.env.SENDGRID_API_KEY)
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const commonErrorHandler = e => { console.warn(`EMAIL sending is failed: ${e}`) };
 module.exports = {
   singUp: async (toEmail) => {
     const path = join(__dirname, './signUp.html');
@@ -18,7 +21,7 @@ module.exports = {
       subject: 'Welcome to SHOP-NODE',
       html: singUpTemplate,
     };
-    return sgMail.send(msg);
+    return sgMail.send(msg).catch(commonErrorHandler);
   },
   resetPassword: async (resetToken, expireDate, toEmail) => {
     const path = join(__dirname, './reset-password.ejs');
@@ -32,6 +35,6 @@ module.exports = {
       subject: 'Reset password SHOP-NODE',
       html: resetPasswordHtml,
     };
-    return sgMail.send(msg);
+    return sgMail.send(msg).catch(commonErrorHandler);
   }
 };

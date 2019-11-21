@@ -31,6 +31,7 @@ const getFullPath = require('./middlewares/getFullPath');
 const userIdentifier = require('./middlewares/userIdentifier');
 const authCheck = require('./middlewares/authCheck');
 const warnings = require('./middlewares/warning');
+const error = require('./middlewares/error');
 //db
 const db = require('./db');
 //MongoDB 
@@ -76,6 +77,7 @@ app.use('/admin', authCheck, adminRouter);
 app.use(shopRouter);
 app.use(authRouter);
 app.use(notFoundController);
+app.use(error);
 
 
 const port = process.env.PORT || constants.PORT;
