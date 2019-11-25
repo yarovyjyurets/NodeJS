@@ -6,6 +6,7 @@ const path = require('path');
 const MongoDBSessionStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const multer = require('multer');
 
 const uri = 'mongodb+srv://dev:pwd@shop-cluster-9xhpi.mongodb.net';
 const store = new MongoDBSessionStore({
@@ -44,6 +45,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 // MIDLEWARES
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'data', 'images')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -53,9 +55,30 @@ app.use(session({
   saveUninitialized: false,
   store
 }));
+
+////
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './data/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`)
+  }
+});
+const ALLOWED_MIMETYPES = ['image/jpg', 'image/jpeg', 'image/png']
+const fileFilter = (req, file, cb) => {
+  if (ALLOWED_MIMETYPES.includes(file.mimetype)) {
+    cb(null, true)
+  } else {
+    cb(null, false)
+  }
+}
+
+app.use(multer({ storage, fileFilter }).single('image'));
+////
+
 app.use(csrf());
 app.use(flash());
-app.use(logRequest);
 app.use(getFullPath);
 app.use(warnings);
 
