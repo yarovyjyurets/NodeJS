@@ -1,6 +1,7 @@
 const Products = require('../models/products');
 const Cart = require('../models/cart');
 const Order = require('../models/order');
+const { createInvoice } = require('../util/pdf-generator');
 
 const getHomePage = async (req, res) => {
   const products = await Products.getAll();
@@ -54,6 +55,15 @@ const postPlaceOrder = async (req, res) => {
   await Order.create(req.user, req.cart);
   res.redirect('/orders');
 };
+const getInvoiceAPI = async (req, res) => {
+  const { orderId } = req.params;
+  const order = await Order.getById(orderId);
+
+  const pdf = createInvoice(order);
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline; filename="filename.pdf"');
+  pdf.pipe(res);
+};
 
 module.exports = {
   getHomePage,
@@ -64,4 +74,5 @@ module.exports = {
   postCart,
   postDeleteProductFromCart,
   postPlaceOrder,
+  getInvoiceAPI,
 };

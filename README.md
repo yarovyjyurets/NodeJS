@@ -20,6 +20,8 @@ docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib
 - <s>Reset passwords</s>
 - <s>Error response for views (flash)</s>
 - <s>Add authorization +-</s>
+- <s>Read from file (multer)</s>
+- <s>Invoice generation with pdfs (pdfkit)</s>
 
 ***Views Requirements***
 

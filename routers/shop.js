@@ -16,5 +16,6 @@ shopRouter.get('/product-detail/:id', handler(shopController.getProductDetail));
 shopRouter.post('/cart', handler(shopController.postCart));
 shopRouter.post('/cart-delete-item/:productId', handler(shopController.postDeleteProductFromCart));
 shopRouter.post('/placeOrder', handler(shopController.postPlaceOrder));
+shopRouter.get('/invoice/:orderId', handler(shopController.getInvoiceAPI));
 
 module.exports = shopRouter;
