@@ -1,12 +1,8 @@
-
-
-
-
 .orders-list ol {
   font-style: italic;
   font-family: Georgia, Times, serif;
   font-size: 24px;
-  color: black;
+  color: rgb(203, 206, 129);
 }
 
 .orders-list ol li p {
@@ -14,10 +10,15 @@
   font-style: normal;
   font-family: Arial;
   font-size: 13px;
-  color: #eee;
+  color: #FBFCD4;
   border-left: 1px solid #999;
 }
 
 .orders-list ol li p em {
   display: block;
+}
+.orders-list ol li a {
+  display: block;
+  text-decoration: none;
+  color: rgb(255, 188, 3);
 }

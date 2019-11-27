@@ -8,6 +8,8 @@
   display: block;
   width: 100%;
   margin-bottom: 0.25rem;
+  background-color: black;
+  color: rgb(230, 161, 59);
 }
 
 .form-control input,

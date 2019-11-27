@@ -11,6 +11,6 @@ adminRouter.get('/edit-product/:productId', handler(adminController.editProductV
 // === REST ===
 adminRouter.post('/add-product', handler(adminController.addProductAPI));
 adminRouter.post('/edit-product/:productId', handler(adminController.editProductAPI));
-adminRouter.post('/delete-product/:productId', handler(adminController.deleteProductAPI));
+adminRouter.delete('/products/:productId', handler(adminController.deleteProductAPI));
 
 module.exports = adminRouter;

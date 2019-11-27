@@ -56,8 +56,9 @@ const editProductAPI = async (req, res) => {
 }
 
 const deleteProductAPI = async (req, res) => {
+  console.log('???')
   await Products.removeProductById(req.params.productId);
-  res.redirect('/admin/product-list');
+  res.status(200).json({ message: 'Delete is success!' });
 }
 
 module.exports = {
