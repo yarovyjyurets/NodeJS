@@ -15,6 +15,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
+.cart__item #delete {
+  background-color: rgb(230, 161, 59);
+  border-color: rgb(187, 35, 35);
+  color: rgb(187, 35, 35);
+}
+
+.cart__item #delete:hover {
+  background-color: rgb(187, 35, 35);
+  border-color: rgb(230, 161, 59);
+  color: black;
+}
+
 .cart__item h1,
 .cart__item h2 {
   margin-right: 1rem;
@@ -22,3 +34,6 @@
   margin: 0;
 }
 
+.btn a {
+  text-decoration: none;
+}

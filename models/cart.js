@@ -35,7 +35,8 @@ if (process.env.DB === 'SQL') {
     const shopDB = getShopDb()
     const productIds = user.cart.products.map(p => new ObjectId(p.productId));
     const products = await shopDB.collection('products').find({ _id: { $in: productIds } }).toArray();
-    const mappedProducts = products.map(({ title, _id, price }) => ({
+    const mappedProducts = products.map(({ title, _id, price, description }) => ({
+      description,
       title,
       price,
       _id: _id.toString(),

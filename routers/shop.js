@@ -9,13 +9,14 @@ const shopRouter = Router();
 shopRouter.get('/', handler(shopController.getHomePage));
 shopRouter.get('/cart', authCheck, handler(shopController.getCart));
 shopRouter.get('/orders', authCheck, handler(shopController.getOrders));
-shopRouter.get('/checkout', authCheck, handler(shopController.getCheckout));
+shopRouter.get('/checkout', authCheck, handler(shopController.getCheckoutView));
 shopRouter.get('/product-detail/:id', handler(shopController.getProductDetail));
 
 // === REST ===
 shopRouter.post('/cart', handler(shopController.postCart));
 shopRouter.post('/cart-delete-item/:productId', handler(shopController.postDeleteProductFromCart));
-shopRouter.post('/placeOrder', handler(shopController.postPlaceOrder));
+shopRouter.get('/checkout/success', authCheck, handler(shopController.postPlaceOrder));
+shopRouter.get('/checkout/cancel', authCheck, handler(shopController.getCheckoutView));
 shopRouter.get('/invoice/:orderId', handler(shopController.getInvoiceAPI));
 
 module.exports = shopRouter;

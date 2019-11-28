@@ -3,6 +3,31 @@
 
 <body>
   <%- include('../includes/navigation.ejs') %>
-  <h1>Checkout</h1>
+  <main>
+    <% if (cart.products.length > 0) { %>
+    <h1 class="centered">Checkout summary:</h1>
+    <hr>
+    <ul class="cart__item-list">
+      <% cart.products.forEach(p => { %>
+      <li class="cart__item">
+        <h1><%= p.title %></h1>
+        <h2>Price: <%= p.price %></h2>
+        <h2>Quantity: <%= p.CartItem && p.CartItem.qty || p.qty %></h2>
+      </li>
+      <% }) %>
+    </ul>
+    <hr>
+    <h1 class="centered">Total price <%= cart.totalPrice %></h1>
+    <hr>
+    <div class="centered">
+      <button id="order-button" class="btn" onclick="placeOrder('<%= sessionId %>')">Place order</button>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="/js/place-order.js"></script>
+
+    </div>
+    <% } else { %>
+    <h1>No Products in Cart! Go and buy something!!!</h1>
+    <% } %>
+  </main>
 </body>
 <%- include('../includes/end.ejs') %>
