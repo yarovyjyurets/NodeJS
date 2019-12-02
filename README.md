@@ -1,10 +1,10 @@
 NodeJS road map!
 
 ***GENERAL TODO***
-- Add validation with any package(JOI, Validator.js, Express-Validator)
-- Add Error handling
+- Add S3 storage for images, invoices
+- Custom error handling middleware better approach
 - refactor structure with API/app.start, db separate, and inversion of control
-- add configuration file, env-vars
+- add configuration file, (env variables, config, __dirname)
 - add docker-compose for local develop with volumes
 - add Dockerfile
 docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib/mysql -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=pwd mysql:8.0
@@ -22,6 +22,7 @@ docker run --restart always --name mysql8.0 -v /usr/local/opt/mysql/8.0:/var/lib
 - <s>Add authorization +-</s>
 - <s>Read from file (multer)</s>
 - <s>Invoice generation with pdfs (pdfkit)</s>
+- <s>validation with any package(JOI, Validator.js, Express-Validator))</s>
 
 ***Views Requirements***
 
